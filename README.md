@@ -1,22 +1,46 @@
 # Boxit
 
-> The receipts. All of them. Sorted.
+Receipt capture and categorisation for taxes. Email them, photograph them, forward them — Boxit files each one under the right category.
 
-Email them, photograph them, forward them. Boxit files each one under the right category — ready for taxes.
+**Status:** v0 skeleton — landing page + receipt-upload preview route. Full OCR/AI not yet wired.
 
-## What you get
+---
 
-- **Snap and forget** — One photo — we extract vendor, amount, date, tax. Even crumpled paper ones.
-- **Auto-grabs email receipts** — Forward your confirmation emails or let us read your inbox, your choice.
-- **Tax-ready exports** — Spreadsheets for you or your CPA. Or direct sync to TurboTax and QuickBooks.
+## Stack
 
-## Category
+| Layer | Choice |
+|---|---|
+| Framework | Next.js 15 (App Router) |
+| Language | TypeScript (strict) |
+| Styling | Tailwind v4 |
+| Fonts | Inter via `next/font/google` |
+| Hosting | Vercel (zero config) |
+| Waitlist | https://waitlist-api-sigma.vercel.app |
 
-Personal finance. Part of a 50-product exploration of high-demand consumer and SMB markets.
+## Run locally
 
-## Status
+```bash
+pnpm install
+pnpm dev
+```
 
-Landing page live with interactive demo and functional waitlist.
+Open http://localhost:3000.
 
-- **Live:** https://mukundakatta.github.io/boxit/
-- **Waitlist API:** https://waitlist-api-sigma.vercel.app/api/waitlist
+## Deploy
+
+Push to `main` — Vercel picks it up automatically. No environment variables required.
+
+## Routes
+
+| Route | Description |
+|---|---|
+| `/` | Landing page (original copy + design preserved) |
+| `/try` | v0 receipt uploader — drop an image, see 3 mocked line items + category dropdowns |
+| `/api/waitlist` | `POST { email }` → forwards to waitlist-api-sigma with `product: "boxit"` |
+
+## What's next
+
+- Wire real OCR (extract vendor, amount, date, tax from photo)
+- Email receipt ingestion (forwarding address)
+- Tax-ready CSV / TurboTax / QuickBooks export
+- Auth + per-user receipt history
